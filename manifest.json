@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Passkey Dictator",
+  "version": "1.0.0",
+  "description": "Devs are clueless about WebAuthn. This extension nukes authenticatorAttachment and platform-only passkey gates, while leaving known intentional flows alone. Stop telling me where I’m allowed to keep my credentials. My key, my rules.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "passkey-dictator@local.invalid",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://google.com/*",
+        "*://*.google.com/*",
+        "*://github.com/*",
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "passkey-dictator.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "world": "MAIN"
+    }
+  ]
+}
