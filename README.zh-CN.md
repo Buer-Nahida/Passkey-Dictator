@@ -166,6 +166,8 @@ Passkey Dictator 修改网站行为时，会在页面控制台留下日志
 
 ## 安装
 
+Firefox 用户：https://addons.mozilla.org/firefox/addon/passkey-dictator
+
 附带的 XPI 没有 Mozilla 签名。标准 Firefox 正式版不能永久安装未签名扩展
 
 测试方法：
