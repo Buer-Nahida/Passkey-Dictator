@@ -166,6 +166,8 @@ On excluded websites, the runtime safety guard may print:
 
 ## Installation
 
+For firefox users: https://addons.mozilla.org/firefox/addon/passkey-dictator
+
 The bundled XPI is not signed by Mozilla. Standard release builds of Firefox cannot permanently install unsigned extensions.
 
 For testing:
