@@ -114,6 +114,36 @@ Pixiv therefore displays “Passkeys cannot be used on this device or browser”
 
 With Passkey Dictator installed, YubiKeys work normally.
 
+### PayPal
+
+PayPal's Passkey page uses the User-Agent to decide whether the browser and operating system "support" Passkeys.
+
+Firefox 154 already includes a WebCompat workaround for PayPal that appends Chrome identifiers to Firefox's User-Agent on PayPal's security settings page.
+
+```text
+Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+```
+
+This bypasses PayPal's browser restriction against Firefox.
+
+However, on Linux, PayPal still displays:
+
+> A passkey can't be created on this device or browser
+
+Then we changed absolutely nothing except the User-Agent, replacing it with Windows Chrome:
+
+```text
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+```
+
+Passkey creation immediately started working normally.
+
+So this is not WebAuthn capability detection. It's an operating-system allowlist.
+
+Passkey Dictator will not spoof an operating-system User-Agent specifically for PayPal.
+
+Even with Passkey Dictator installed, Passkeys still do not work properly on Linux. Garbage PayPal. Whoever wants to use it can use it.
+
 ## Why this extension exists
 
 Hardware security keys are valid FIDO2 / Passkey authenticators.
@@ -166,7 +196,7 @@ On excluded websites, the runtime safety guard may print:
 
 ## Installation
 
-For firefox users: https://addons.mozilla.org/firefox/addon/passkey-dictator
+For firefox users: <https://addons.mozilla.org/firefox/addon/passkey-dictator>
 
 The bundled XPI is not signed by Mozilla. Standard release builds of Firefox cannot permanently install unsigned extensions.
 

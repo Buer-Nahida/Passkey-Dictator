@@ -114,6 +114,36 @@ Pixiv 的前端使用平台认证器能力检测来控制整个 Passkey UI
 
 安装 Passkey Dictator 后，Yubikey 可正常使用
 
+### PayPal
+
+PayPal 的 Passkey 页面会根据 User-Agent 判断浏览器和操作系统是否“支持” Passkey
+
+Firefox 154 已经内置了针对 PayPal 的 WebCompat 修复，会在 PayPal 的安全设置页面给 Firefox 的 User-Agent 追加 Chrome 标识
+
+```text
+Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+```
+
+这样可以绕过 PayPal 对 Firefox 的浏览器限制
+
+但是在 Linux 上，PayPal 依然会显示
+
+> 无法在此设备或浏览器上创建通行密钥
+
+然后我们什么都没改，只把 User-Agent 换成 Windows Chrome
+
+```text
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
+```
+
+Passkey 创建功能立刻恢复正常
+
+所以这不是 WebAuthn 能力检测，而是操作系统白名单
+
+Passkey Dictator 不会为 PayPal 单独伪装操作系统 User-Agent
+
+安装 Passkey Dictator 后，Linux 也无法正常使用，垃圾 PayPal 谁爱用谁用
+
 ## 为什么会有这个扩展
 
 硬件安全密钥是合格的 FIDO2 / Passkey 认证器
@@ -166,7 +196,7 @@ Passkey Dictator 修改网站行为时，会在页面控制台留下日志
 
 ## 安装
 
-Firefox 用户：https://addons.mozilla.org/firefox/addon/passkey-dictator
+Firefox 用户：<https://addons.mozilla.org/firefox/addon/passkey-dictator>
 
 附带的 XPI 没有 Mozilla 签名。标准 Firefox 正式版不能永久安装未签名扩展
 
